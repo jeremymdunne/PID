@@ -28,7 +28,9 @@ void PID::setSP(float setPoint){
   _SP = setPoint;
 }
 
-float PID::calculate(float currentValue, long elapsedMillis){
+float PID::calculate(float currentValue){
+  long currentTime = millis();
+  long elapsedMillis = currentTime - lastUpdateTime;
   error = _SP - currentValue;
   if(_kP != 0){
     pError =  error* _kP;
@@ -46,5 +48,6 @@ float PID::calculate(float currentValue, long elapsedMillis){
   totalError = pError + iError + dError;
   if(_max_error != 0)
   if(fabs(totalError) > _max_error) totalError = totalError/fabs(totalError) * _max_error;
+  lastUpdateTime = currentTime;
   return totalError;
 }

@@ -16,6 +16,14 @@ PID::PID(float kP, float kI, float kD, float maxI, float maxError){
   _max_error = maxError;
 }
 
+PID::PID(PID_SETTINGS settings){
+  _kP = settings.kP;
+  _kI = settings.kI;
+  _kD = settings.kD;
+  _max_I = settings.maxI;
+  _max_error = settings.maxError;
+}
+
 void PID::setSP(float setPoint){
   _SP = setPoint;
 }

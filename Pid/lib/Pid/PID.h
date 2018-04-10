@@ -2,10 +2,21 @@
 #define _PID_H
 #include <Math.h>
 
+struct PID_SETTINGS {
+  float kP = 0;
+  float kI = 0;
+  float kD = 0;
+  float maxI = 0;
+  float maxError = 0;
+};
+
 class PID{
+
+
 public:
   PID(float kP, float kI, float kD);
   PID(float kP, float kI, float kD, float maxI, float maxError);
+  PID(PID_SETTINGS settings);
   float calculate(float currentValue, long elapsedMillis);
   void setSP(float setPoint);
 private:

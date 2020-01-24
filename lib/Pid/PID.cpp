@@ -46,7 +46,8 @@ float PID::calculate(float currentValue){
       Serial.println("I-Comp: " + String(iError));
     }
     if(_kD != 0){
-      dError = _kD * (dError  - error)/(elapsedMillis/1000);
+      dError = _kD * (prev_error  - error)/(elapsedMillis/1000);
+      prev_error = error; 
     }
     totalError = pError + iError + dError;
     if(_max_error != 0)
